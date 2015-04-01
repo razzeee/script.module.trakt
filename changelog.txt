@@ -1,3 +1,7 @@
+Version 2.2.0
+
+- trakt.py d1391819e485c29283bd59fa1e50e0af44a75ffd
+
 Version 2.1.1-beta
 
 - trakt.py 0edc50575e3764950660e3426e6981b5a9a33f72
