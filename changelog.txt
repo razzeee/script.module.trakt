@@ -1,3 +1,7 @@
+Version 2.4.1
+
+- trakt.py Version 2.4.1
+
 Version 2.3.3
 
 - trakt.py ac86ab644e5900df388f236f8ffdf8413fcf5248
