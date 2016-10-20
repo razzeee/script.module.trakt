@@ -1,3 +1,54 @@
+2.9.0 (2016-10-16)
+------------------
+**Added**
+ - Properties:
+     - :code:`Person.listed_at`
+     - :code:`Video.action`
+ - Methods:
+     - :code:`Trakt['sync/history'].get`
+     - :code:`Trakt['sync/history'].shows`
+     - :code:`Trakt['sync/history'].movies`
+
+**Changed**
+ - Updated :code:`SyncMapper` to support flat iterators
+ - Methods:
+     - :code:`Trakt['sync/ratings'].get`
+        - Flat iterator will now be returned if no :code:`media` parameter is provided
+     - :code:`Trakt['sync/watchlist'].get`
+        - Pagination is now supported, can be enabled with :code:`pagination=True`
+        - :code:`media` parameter can now be specified as :code:`None` to return all items (with no type filter)
+
+**Fixed**
+ - Pagination wouldn't work correctly if a starting page was specified
+
+2.8.0 (2016-09-17)
+------------------
+**Added**
+ - Lists containing people are now supported (instead of raising an exception)
+ - :code:`SyncMapper` can now be used without the :code:`store` parameter
+ - Objects:
+     - :code:`Person`
+ - Properties:
+     - :code:`Video.id` (history id)
+     - :code:`Video.watched_at` (history timestamp)
+ - Methods:
+     - :code:`Media.get_key(<service>)`
+
+2.7.1 (2016-08-30)
+------------------
+**Fixed**
+ - Invalid classifier was defined in [setup.py]
+
+2.7.0 (2016-08-30)
+------------------
+**Added**
+ - Support for multiple :code:`media` options on the :code:`Trakt['search'].query()` method
+ - Implemented the :code:`media` parameter on the :code:`Trakt['search'].lookup()` method
+
+**Changed**
+ - "Request failed" warnings now display the request method and path to help with debugging
+ - Improved handling of requirements in [setup.py]
+
 2.6.1 (2016-05-19)
 ------------------
 **Changed**

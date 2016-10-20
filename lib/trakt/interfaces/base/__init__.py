@@ -5,6 +5,7 @@ from trakt.core.pagination import PaginationIterator
 from trakt.helpers import setdefault
 
 from functools import wraps
+from six.moves.urllib.parse import urlparse
 import logging
 import warnings
 
@@ -71,7 +72,20 @@ class Interface(object):
             # Lookup status code in trakt error definitions
             name, desc = ERRORS.get(response.status_code, ("Unknown", "Unknown"))
 
-            log.warning('Request failed: %s - "%s" (code: %s)', name, desc, response.status_code)
+            # Display warning (with extra debug information)
+            method = response.request.method
+            path = urlparse(response.request.url).path
+            code = response.status_code
+
+            log.warn('Request failed: "%s %s" - %s: "%%s" (%%s)' % (method, path, code), desc, name, extra={
+                'data': {
+                    'http.headers': {
+                        'cf-ray': response.headers.get('cf-ray'),
+                        'X-Request-Id': response.headers.get('X-Request-Id'),
+                        'X-Runtime': response.headers.get('X-Runtime')
+                    }
+                }
+            })
 
             if exceptions:
                 # Raise an exception (including the response for further processing)
@@ -94,7 +108,10 @@ class Interface(object):
             if pagination:
                 return PaginationIterator(self.client, response)
 
-            warnings.warn('Unhandled pagination response, more pages can be returned with `pagination=True`', stacklevel=3)
+            warnings.warn(
+                'Unhandled pagination response, more pages can be returned with `pagination=True`',
+                stacklevel=3
+            )
 
         # Parse response, return data
         content_type = response.headers.get('content-type')
