@@ -161,3 +161,7 @@ class SearchMapper(Mapper):
             episode._update(item)
 
         return episode
+
+    @classmethod
+    def person(cls, client, item, **kwargs):
+        return None
