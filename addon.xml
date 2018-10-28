@@ -4,7 +4,7 @@
        version="3.0.0"
        provider-name="Fuzeman, Razzeee">
   <requires>
-    <import addon="xbmc.python" version="2.1.0"/>
+    <import addon="xbmc.python" version="2.14.0"/>
 	<import addon="script.module.requests" version="2.12.4"/>
 	<import addon="script.module.six" version="1.9.0"/>
 	<import addon="script.module.arrow" version="0.6.0"/>
